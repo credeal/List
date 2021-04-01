@@ -11,10 +11,47 @@ namespace Collections
     {
         static void Main(string[] args)
         {
-            ListaLeitura();
+            Sets();
         }
 
+        public static void Sets()
+        {
+            //SETS  = Conjuntos
+            //Duas propriedades do SET
+            //1 - Não permite duplicidade
+            //2 - Os elementos não são mantidos em ordem especifica 
 
+            ISet<string> alunos = new  HashSet<string>();
+            alunos.Add("Vanessa");
+            alunos.Add("Ana");
+            alunos.Add("Rafael");
+
+            //Imprimindo
+            Console.WriteLine(string.Join(",",alunos));
+            Console.WriteLine();
+
+            //Adicionadno mais
+            alunos.Add("Kethlyn");
+            alunos.Add("Thamires");
+            alunos.Add("Vitor");
+            Console.WriteLine(string.Join(",", alunos));
+            Console.WriteLine();
+
+            alunos.Remove("Vitor");
+            alunos.Add("Jubileu");
+            Console.WriteLine(string.Join(",", alunos));
+            Console.WriteLine();
+
+            //Qual a vantagem do SET  sobre a lista ? LOOK-UP!
+            //É MAIS RAPIDO QUE UMA LISTAAAA
+            //Desempenho HashSet X List: escabilidade x mémoria
+
+            //Ordenando
+            List<string> alunosNovo = new List<string>(alunos);
+            alunosNovo.Sort();
+            Console.WriteLine(string.Join(",", alunosNovo));
+
+        }
 
         public static void ListaLeitura()
         {
