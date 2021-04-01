@@ -9,9 +9,92 @@ namespace Collections
 {
     class Program
     {
+        static Queue<string> pedagio = new Queue<string>();
+
+        private static void Enfileirar(string veiculo)
+        {
+            var anterior = string.Empty;
+            if (pedagio.Any())
+            {
+               anterior = pedagio.Peek();
+            }
+
+            Console.WriteLine($"Entrou na fila: {veiculo} - Veiculos anterior: {anterior} ");
+            pedagio.Enqueue(veiculo);
+            ImprimirFila();
+        }
+
+        private static void Desenfileirar()
+        {
+
+            string veiculo = pedagio.Dequeue();
+            Console.WriteLine($"Saiu da fila: {veiculo}");
+            ImprimirFila();
+        }
+
+        private static void ImprimirFila()
+        {
+            Console.WriteLine("FILA:");
+            foreach (var v in pedagio)
+            {
+                Console.WriteLine(v);
+            }
+        }
+
         static void Main(string[] args)
         {
-            Dicionario();
+            Enfileirar("Van");
+            Enfileirar("kombi");
+            Enfileirar("guincho");
+            Enfileirar("pickup");
+
+            Desenfileirar();
+        }
+
+        public static void StackPilha()
+        {
+            //Utilizando Pilha
+
+            var teste = new Bastao();
+            teste.Colocar("-");
+            teste.Colocar("--");
+            teste.Colocar("---");
+            teste.Retirar();
+            teste.Retirar();
+            teste.Retirar();
+        }
+
+        public static void LinkedList()
+        {
+            List<string> Frutas = new List<string>() { "Banana", "Perã", "Maçã" };
+
+            LinkedList<string> Dias = new LinkedList<string>();
+            //Podemos Adicionar de 4 Formas:
+            //1 - Como  primeiro nó
+            //2 - Como último nó
+            //3 - Antes de um nó conhecido
+            //4 - Depois de um nó conhecido
+            var d4 =  Dias.AddFirst("Quarta-Feira");
+
+            //Vamos adicionar  segunda ,antes de quarta
+            var d2 = Dias.AddBefore(d4, "Segunda-Feira");
+
+            var d3 = Dias.AddAfter(d2, "Terça-Feira");
+
+            var d6 = Dias.AddAfter(d4, "Sexta-feira");
+
+            var d7 = Dias.AddAfter(d6, "Sabado");
+
+            var d5 = Dias.AddBefore(d6, "Quinta-feira");
+
+            var d1 = Dias.AddBefore(d2, "Domingo");
+
+            Dias.Remove("Sabado");
+
+            foreach (var dias in Dias)
+            {
+                Console.WriteLine(dias);
+            }
         }
 
         public static void Dicionario()
@@ -150,6 +233,35 @@ namespace Collections
             });
         }
 
+    }
+
+    class Bastao
+    {
+        private readonly Stack<string> steps = new Stack<string>();
+        string prato = "";
+      
+
+        public Bastao()
+        {
+            Console.WriteLine(prato += "");
+        }
+
+        public void Colocar(string ex)
+        {
+            steps.Push(prato);
+            prato = ex;
+            Console.WriteLine(prato);
+        }
+
+        public void Retirar()
+        {
+            if (steps.Any())
+            {
+                prato = steps.Pop();
+                Console.WriteLine(prato);
+            }
+           
+        }
     }
 
     class Alunos
