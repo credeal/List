@@ -11,7 +11,22 @@ namespace Collections
     {
         static void Main(string[] args)
         {
-            Sets();
+            Dicionario();
+        }
+
+        public static void Dicionario()
+        {
+            Alunos n1 = new Alunos(1, "Rafael");
+            Alunos n2 = new Alunos(2, "João");
+            Alunos n3 = new Alunos(3, "Larissa");
+
+            n1.Matricular(n1);
+            n1.Matricular(n2);
+            n1.Matricular(n3);
+
+            Alunos retorno = n1.BuscarMatriculado(2);
+
+            Console.WriteLine($"Resultado do retorno: {retorno}");
         }
 
         public static void Sets()
@@ -50,6 +65,18 @@ namespace Collections
             List<string> alunosNovo = new List<string>(alunos);
             alunosNovo.Sort();
             Console.WriteLine(string.Join(",", alunosNovo));
+
+            ISet<Alunos> Alunos = new HashSet<Alunos>();
+
+            Alunos.Add(new Alunos(1, "David"));
+            Alunos.Add(new Alunos(1, "David"));
+            Alunos.Add(new Alunos(1, "David"));
+            Alunos.Add(new Alunos(1, "David"));
+            Alunos.Add(new Alunos(1, "David"));
+
+            Console.WriteLine(string.Join(",",Alunos.Select(aluno => aluno.Nome)));
+
+            SortedSet<string> nomes = new SortedSet<string>();//Outra maneira bem mais rapida que list
 
         }
 
@@ -123,6 +150,37 @@ namespace Collections
             });
         }
 
+    }
+
+    class Alunos
+    {
+        private IDictionary<int, Alunos> dicionarioAlunos = new Dictionary<int, Alunos>();
+
+        public Alunos(int id, string nome)
+        {
+            Id = id;
+            Nome = nome;
+        }
+
+        public int Id { get; set; }
+        public string Nome { get; set; }
+
+        public void Matricular(Alunos aluno)
+        {
+            dicionarioAlunos.Add(aluno.Id, aluno);
+        }
+
+        public Alunos BuscarMatriculado(int id)
+        {
+            Alunos aluno = null;
+            dicionarioAlunos.TryGetValue(id, out aluno); //vai preencher o aluno caso encontre
+            return aluno;
+        }
+
+        public override string ToString()
+        {
+            return $"Id: {Id}\nNome:{Nome}";
+        }
     }
 
     class Aulas : IComparable
